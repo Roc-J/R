@@ -36,7 +36,41 @@ Rattle的安装：
 即可完成Rattle的安装  
 通过library函数载入这个包，并通过rattle()命令调出Rattle界面。
 
+## 新手学习 ##
 
+R语言的标准赋值符号是<-，也可以使用=。  
+
+	> a <- 1:10
+	> a
+	 [1]  1  2  3  4  5  6  7  8  9 10
+	> 1+1
+	[1] 2
+	> 1+
+	+ 1
+	[1] 2
+	> A
+	Error: object 'A' not found
+
+cor()函数是来求相关系数的
+
+	> cor(iris[,1:4])
+             Sepal.Length Sepal.Width Petal.Length Petal.Width
+	Sepal.Length    1.0000000  -0.1175698    0.8717538   0.8179411
+	Sepal.Width    -0.1175698   1.0000000   -0.4284401  -0.3661259
+	Petal.Length    0.8717538  -0.4284401    1.0000000   0.9628654
+	Petal.Width     0.8179411  -0.3661259    0.9628654   1.0000000
+	> Cor(iris[,1:4])
+	Error in Cor(iris[, 1:4]) : could not find function "Cor"
+
+
+## 获得帮助、工作空间、包 ##
+
+获得帮助：
+
+	?median
+	??median   
+
+工作空间：就是当前R的工作环境
 
 
 
