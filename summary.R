@@ -29,4 +29,4 @@ ftable(x)
 
 object.size(airquality)
 
-print(object.size(airquality),units = "kb")
+print(object.size(airquality),units = "Kb")
