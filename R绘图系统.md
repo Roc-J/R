@@ -51,4 +51,63 @@ par()
  -mfrow / mfcol 
  -这些参数可以在每次plot之前进行修改  
 
+## Lattice绘图系统 ##
+* 绘图函数（lattice包）
+	* xyplot 适合画散点图
+	* bwplot  
+	* histogram  柱状图
+	* stripplot  
+	* dotplot  点图，差异
+	* splom  
+	* levelplot  
+	* contourplot  
+	* 格式:xyplot(y~x | f*g ,data) y,x 是因变量和自变量，f*g是分类变量  
+	* panel函数，用于控制每个面板内的绘图  
+* grid包  
+	* 实现了独立于base的绘图系统  
+	* lattice包是基于grid创建的，很少直接从grid包调用函数   
+
+
+* lattice与Base的重要区别
+	* Base绘图函数直接在图形设备上绘图  
+	* lattice绘图函数返回trellis类对象  
+		* 打印函数真正执行了在设备上绘图  
+		* 命令执行时，trellis类对象会被自动打印，所以看起来就像是lattice函数直接完成了绘图  
+	
+## ggplot2绘图系统 ##
+
+* 层（Layer)  
+	* data 感兴趣的变量(data frame)  
+	* Aesthetics x-axis/y-axis/color/fill/size/labels/alpha/shape/linear width/linear type   美学属性相关
+	* Geometries point/line/histogram/bar/boxplot  几何客体层
+	* Facets 最基本的层   columns /rows 
+	* statistics 统计层 binning/smoothing/descriptive/inferential
+	* Coordinates 坐标系cartesian/fixed / polar /limits
+	* themes 主题
+
+* 绘图函数  
+	* qplot()
+		* 类似于Base系统的plot()，参数包含aesthetics/geom/facet...  
+		* 隐藏了绘图实现的细节，灵活性欠佳  
+	* ggplot()
+		* 是核心，可以实现qplot()无法实现的功能  
+		* 调用ggplot()本身并不能实现绘图，要在其基础上添加层（如geom_point())才可以
+
+
+## R color ##
+* grDevice包  
+	* colorRamp() & colorRampPalette()
+	* 颜色名字可使用colors()获取
+
+* RColorBrewer包
+	* 三类调色板：sequential/diverging/qualitative  
+	* 调色板信息可与colorRamp/colorRampPalette结合使用  
+
+
+## 绘图思考 ##
+* 在哪里绘图（屏幕？文件？）
+* 如何使用图（屏幕呈现？网页呈现？文章用图？）  
+* 用于绘图的数据量的大小？（向量格式 vs 位图）
+* 是否需要动态调整图的大小？（向量格式 vs 位图） 
+* 用哪个绘图系统(Base /lattice /ggplot2）？一般三者不混用
 
