@@ -282,6 +282,44 @@ library(MASS)
 merged.Pima <- merge(x = Pima.te, y = Pima.tr,
                     by.x = c("bp","bmi"),
                     by.y = c("bp","bmi"))
-
+s
 print(merged.Pima)
 nrow(merged.Pima)
+
+print(ships)
+library(reshape2)
+molten.ships <- melt(ships, id = c("type","year"))
+print(molten.ships)
+
+print(seq(12:55))
+print(mean(seq(2:9)))
+print(sum(1:100))
+
+squre_of_a_number <- function(a) {
+  print(a^2)
+}
+
+print(squre_of_a_number(9))
+
+# Create a list containing a vector ,a matrix and a list
+list_data <- list(c("Jan","Feb","Mar"), matrix(c(1,2,3,6,5,4),nrow = 2),list("green",43.2))
+list_data
+
+names(list_data) <- c("1st Quarter","A_matrix","A inner list")
+
+print(list_data[1])
+
+# Elements are arranged sequentially by row.
+M <- matrix(c(3:14), nrow = 4, byrow = TRUE)
+print(M)
+
+# Elements are arranged sequentially by column.
+N <- matrix(c(3:14), nrow = 4, byrow = FALSE)
+print(N)
+
+# Define the column and row names.
+rownames = c("row1", "row2", "row3", "row4")
+colnames = c("col1", "col2", "col3")
+
+P <- matrix(c(3:14), nrow = 4, byrow = TRUE, dimnames = list(rownames, colnames))
+print(P)
