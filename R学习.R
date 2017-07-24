@@ -323,3 +323,199 @@ colnames = c("col1", "col2", "col3")
 
 P <- matrix(c(3:14), nrow = 4, byrow = TRUE, dimnames = list(rownames, colnames))
 print(P)
+
+# Create a vector as input.
+data <- c("East","West","East","North","North","East","West","West","West","East","North")
+
+print(data)
+print(is.factor(data))
+
+# Apply the factor function.
+factor_data <- factor(data)
+
+print(factor_data)
+print(is.factor(factor_data))
+
+# Create the vectors for data frame.
+height <- c(132,151,162,139,166,147,122)
+weight <- c(48,49,66,53,67,52,40)
+gender <- c("male","male","female","female","male","female","male")
+
+# Create the data frame.
+input_data <- data.frame(height,weight,gender)
+print(input_data)
+
+# Test if the gender column is a factor.
+print(is.factor(input_data$gender))
+
+# Print the gender column so see the levels.
+print(input_data$gender)
+
+# generate the factor rank
+v <- gl(3,4,labels = c("qin","jing","kun"))
+print(v)
+
+
+
+# create the data frame
+emp.data <- data.frame(
+  emp_id = c(1:5),
+  emp_name = c("Rick","Dan","Nichelle","Ryan","Gary"),
+  salary = c(4562,4553,4564,6545,3467),
+  start_data = as.Date(c("2012-01-01","2013-01-01","2014-01-01","2015-01-01","2016-01-01")),
+  stringsAsFactors = FALSE
+)
+
+# print the data frame
+print(emp.data)
+
+# get the structure of the data frame
+print(str(emp.data))
+
+# print the summmary
+print(summary(emp.data))
+
+
+# 绘制条形图 ####
+# Create the data for the chart
+H <- c(7,12,28,3,41)
+
+# Give the chart file a name
+png(file = "barchart.png")
+
+# plot the bar chart
+barplot(H)
+
+# save the file
+dev.off()
+
+print("#### the 2ed chart")
+# create the data for the chart
+H <- c(5,26,64,24,77)
+# labels
+M <- c("Mar","Apr","May","Jun","Jul")
+
+# create a file
+png(file = "barplot_month_revenue.png")
+
+# plot the chart
+barplot(H,names.arg = M, xlab = "Month", ylab = "Revenue", main = "Revenue chart",col = "blue",border = "red")
+
+# save 
+dev.off()
+
+# plot the matrix
+# create the input vectors
+colors <- c("blue","green","red")
+months <- c("Mar","Apr","May","Jun","Jul")
+region <- c("East","West","North")
+
+# create the matrix
+values <- matrix(c(34,23,55,23,12,43,54,23,12,54,23,121,43,55,23),nrow = 3, ncol = 5,byrow = TRUE)
+
+# give the chart
+png(file = "barfile_stacked.png")
+
+# plot 
+barplot(values,names.arg = months,xlab = "month",ylab = "revenue",main = "total revenue",col = colors)
+
+# add the legend to the chart
+legend("topleft",regions,cex = 1.3,fill = colors)
+
+# save 
+dev.off()
+
+# boxplot ####
+input <- mtcars[,c('mpg','cyl')]
+print(head(input))
+
+# by the cyl to plot the boxplot
+# give the chart 
+png(file = "boxplot.png")
+
+# plot 
+boxplot(mpg ~ cyl, data = mtcars, main = "Mileage Data",xlab = "Number of cylinders", ylab = "Miles per")
+
+dev.off()
+
+# plot chart with 
+# file
+png(file = "boxplot_with_notch.png")
+
+# plot the chart
+boxplot(
+  mpg ~ cyl,data = mtcars,
+  xlab = "Number of Cylinders",
+  ylab = "Miles per Gallon",
+  main = "Mileage Data",
+  notch = TRUE,
+  varwidth = TRUE,
+  col = c("green","yellow","purple"),
+  names = c("high","medium","Low")
+)
+
+# save 
+dev.off()
+
+# Create the data for the chart.
+v <- c(7,12,28,3,41)
+t <- c(14,7,6,19,3)
+s <- C(10,8,9,11,12)
+
+# Give the chart file a name.
+png(file = "line_chart_2_lines.jpg")
+
+# Plot the bar chart.
+plot(v,type = "o",col = "red", xlab = "Month", ylab = "Rain fall", 
+     main = "Rain fall chart")
+
+lines(t, type = "o", col = "blue")
+lines(s, type = "o", col = "green")
+# Save the file.
+dev.off()
+
+
+# create data for the graph
+x <- c(21,54,34,23)
+labels <- c("London","new york","singapore","Numbai")
+
+# file name
+png(file = "city_title_colours.png")
+ 
+# plot
+pie(x, labels, main = "City pie chart", col = rainbow(length(x)))
+
+# save 
+dev.off()
+
+
+# split the pie
+# create
+x <- c(21,10,56,34)
+labels <- c("shangxi","hebei","henan","shandong")
+
+piepercent <- round(100*x/sum(x),1)
+
+# file
+png(file = "city_percentage_legends.jpg")
+
+# plot
+pie(x, labels = piepercent, main = "city pie chart", col = rainbow(length(x)))
+
+legend("topright", c("shangxi","hebei","henan","shandong"), cex = 0.8, fill = rainbow(length(x)))
+
+# save 
+dev.off()
+
+
+# 3d pie
+library(plotrix)
+
+x <- c(21,34,54,23)
+lbls <- c("shangxi","hebei","henan","shandong")
+
+png(file = "3d_pie_chart.jpg")
+
+pie3D(x, labels = lbls, explode = 0.1, main ="Pie chart of provices")
+
+dev.off()
