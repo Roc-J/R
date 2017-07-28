@@ -88,8 +88,10 @@ R 拥有一个数目很大的图形参数列表。该列表包括**控制线条�
 * 直接在绘图函数中设置参数，这种方式只影响当前绘图函数，但是不是所有的参数都能够通过这种方式设置  
 * 通过par()函数设置，这种方式会影响当前绘图设备上的所有图形。
 
-`plot(x,y,type="b",main="main title",sub='sub title',xlab="x axis",ylab='y axis',asp=0.2)
-`
+
+```
+plot(x,y,type="b",main="main title",sub='sub title',xlab="x axis",ylab='y axis',asp=0.2)
+```
 
 
 
