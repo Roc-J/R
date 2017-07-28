@@ -2,7 +2,6 @@ library(xlsx)
 workbook <- 'F:/Github/R/goods.xls'
 
 mydataframe <- read.xlsx(workbook,1,encoding = "UTF-8")
-# View(mydataframe)
 # 剔除不规则记录后，先统计分析以下七个字段
 usedata <- as.data.frame(mydataframe)[26:844,]
 
@@ -16,7 +15,9 @@ for(i in 1:length(price)){
   }
 }
 price <- as.numeric(price)
+# 查看基本的数据分布信息
 summary(price)
+# 以箱线图的形式显示
 boxplot(price,ylab = "price",col = "green", main = "Price_goods_charts")
 
 # 分析促销价
@@ -28,12 +29,10 @@ new_saleprice <- na.omit(saleprice)
 service <- usedata$Service
 
 # 分析月销售
-sales <- as.data.frame(usedata$Sales)
-# sales <- as.numeric(usedata$Sales)
+sales <- as.numeric(usedata$Sales)
 
 # 分析评论数
-reviews <- as.data.frame(usedata$Reviews)
-# reviews <- as.numeric(usedata$Reviews)
+reviews <- as.numeric(usedata$Reviews)
 
 # 分析收藏数
 collection <- as.character(usedata$Collection)
@@ -45,26 +44,28 @@ for(i in 1:length(collection)){
     collection[i] <- substring(collection[i],2)
   }
 }
-collection <- as.data.frame(collection)
-#collection <- as.numeric(collection)
 
 # 线性模型
-input <- usedata[,c("Sales","Reviews")]
-# input <- as.data.frame(input)
-input
+input <- data.frame(sales,reviews,as.data.frame(collection))
 
-goods_model <- lm(Sales~Reviews, data = input)
-print(goods_model)
+# 描绘了月销量和评论数和收藏之间的图
+plot(sales ~ collection, data = as.data.frame(input))
+plot(sales ~ reviews, data = input)
+plot(reviews ~ collection,data = input)
 
+# 线性建模
+fm <- lm(sales ~ reviews+collection, data = as.data.frame(input))
+# 结果并不是很理想
+print(fm)
 
 # 分析品牌
 Brand <- usedata$Brand
 Brand_static <- table(Brand)
 Brand_static
   # 基本绘图
-plot(Brand_static)
+plot(Brand_static,xlab = "品牌种类", ylab = "数量", col = rainbow(7))
   # 条形图
-barplot(Brand_static)
+barplot(Brand_static,xlab = "品牌种类", ylab = "数量", col = rainbow(7))
 
 library(plotrix)
 pie(Brand_static)
@@ -82,6 +83,11 @@ cate <- factor(usedata$DosageForm)
 cate <- table(cate)
 plot(cate, main = "不同药剂的数量统计", xlab = "药剂的种类", ylab = "数量")
 
-barplot(cate,main = "不同药剂的数量统计", xlab = "药剂的种类", ylab = "数量")
-pie(cate)
+barplot(cate,main = "不同药剂的数量统计", xlab = "药剂的种类", ylab = "数量", col = rainbow(4))
 
+catexy <- as.data.frame(sort(prop.table(cate)))
+label_cate <- c(as.character(tail(catexy$cate)),"其他")
+catey <- c(tail(catexy$Freq))
+catex <- c(tail(catexy$Freq),1-sum(catey))
+catexpercent <- round(100*catex/1,1)
+pie3D(catexpercent, labels = label_cate, main = "Cate_pie_chart")
